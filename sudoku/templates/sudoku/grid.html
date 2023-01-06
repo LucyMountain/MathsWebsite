@@ -8,9 +8,9 @@
   <form action="{% url 'sudoku:solve' %}" method="post">
   {% csrf_token %}
     <table>
-      {% for n in "123456789" %}
+      {% for l in "012345678" %}
       <tr>
-        {% for l in "ABCDEFGHI" %}
+        {% for n in "012345678" %}
         <td>
           <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="" class="square" maxlength="1" size="1">
         </td>
