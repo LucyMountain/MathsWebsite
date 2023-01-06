@@ -1,1 +1,5 @@
 /Scripts/
+/.idea/
+/db.sqlite3/
+/pyvenv.cfg/
+/Lib\site-packages/
