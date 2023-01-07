@@ -20,7 +20,7 @@ question_1 = Question.objects.create(
 )
 
 question_2 = Question.objects.create(
-    question_text="When?",
+    question_text="Who are you?",
     pub_date=timezone.now() + datetime.timedelta(days=1)
 )
 
