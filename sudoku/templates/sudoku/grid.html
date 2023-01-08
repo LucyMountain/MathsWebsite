@@ -15,13 +15,15 @@
       <tr>
         {% for n in "012345678" %}
         <td>
-          <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="{{ grid|letter:l|number:n }}" maxlength="1" size="1" class="sudoku_cell">
+          <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="{{ grid|letter:l|number:n }}" maxlength="1" size="1" class="{{ original|letter:l|number:n }}">
         </td>
         {% endfor %}
       </tr>
       {% endfor %}
     </table>
-  <input type="submit" value="Submit" name="submit">
+    <input type="submit" value="Submit" name="submit">
   </form>
+  <button onclick="location.href='{% url 'sudoku:index' %}'">New Sudoku</button>
+  <button onclick="location.href='{% url 'sudoku:test' %}'">Test Sudoku</button>
 </body>
 </html>

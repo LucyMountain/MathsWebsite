@@ -1,4 +1,7 @@
 
+body {
+  background-color:red;
+}
 table {
   border-spacing:0px;
 }
@@ -25,11 +28,17 @@ tr:nth-child(3n) td {
   padding:0px 0px 0px 0px;
   background-color:yellow;
 }
-.sudoku_cell.new {
+.new {
   color:red
 }
-input[name="submit"]{
+input[name="submit"] {
   margin:0em auto;
   color:red;
   background-color:green;
+}
+button {
+  border-radius:5px;
+  color:purple;
+  background-color:orange;
+  cursor:crosshair
 }

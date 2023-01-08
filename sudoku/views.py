@@ -10,7 +10,13 @@ from sudoku.solver import Cell, evaluate_grid
 
 
 def index(request):
-    return render(request, 'sudoku/grid.html')
+    original = {}
+    letters = list("ABCDEFGHI")
+    for row in range(9):
+        for column in range(9):
+            original[letters[row] + str(column)] = "sudoku_cell"
+    context = {'original': original}
+    return render(request, 'sudoku/grid.html', context)
 
 
 def test_example(request):
@@ -37,11 +43,15 @@ def test_example(request):
         ["", 3, "", "", "", 6, "", "", ""]
     ]
     grid = {}
+    original = {}
     letters = list("ABCDEFGHI")
     for row in range(9):
         for column in range(9):
+            original[letters[row] + str(column)] = "sudoku_cell"
             grid[letters[row] + str(column)] = test_grid[row][column]
-    context = {'grid': grid}
+    context = {'grid': grid,
+               'original': original
+               }
     return render(request, 'sudoku/grid.html', context)
 
 
@@ -52,7 +62,7 @@ def solve(request):
     for row in range(9):
         for column in range(9):
             i = request.POST[letters[row] + str(column)]
-            original[letters[row]+str(column)] = "sudoku_cell" if len(i) == 0 else "new"
+            original[letters[row]+str(column)] = "sudoku_cell new" if len(i) == 0 else "sudoku_cell"
             v = int(i) if len(i) > 0 else 0
             grid[row, column] = Cell(v, ([1, 2, 3, 4, 5, 6, 7, 8, 9] if v == 0 else []), row, column)
     solved = evaluate_grid(grid)
@@ -61,6 +71,6 @@ def solve(request):
         for column in range(9):
             grid[letters[row]+str(column)] = solved[row][column].value
     context = {'grid': grid,
-               'original':original
+               'original': original
                }
     return render(request, 'sudoku/grid.html', context)
