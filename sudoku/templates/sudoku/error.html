@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+{% load static %}
+{% load filters %}
+<link rel="stylesheet" type="text/css" href="{% static 'sudoku/style.css' %}">
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Error</title>
+</head>
+<body>
+<h1>u r dumbass</h1>
+  <div class="button_bar">
+    <button onclick="location.href='{% url 'sudoku:index' %}'">New Sudoku</button>
+    <button onclick="location.href='{% url 'sudoku:test' %}'">Test Sudoku</button>
+  </div>
+</body>
+</html>

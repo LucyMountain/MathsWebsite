@@ -1,6 +1,6 @@
 
 body {
-  background-color:red;
+  background-color:#b6ebd5;
 }
 table {
   border-spacing:0px;
@@ -26,7 +26,8 @@ tr:nth-child(3n) td {
   text-align:center;
   border:0px solid;
   padding:0px 0px 0px 0px;
-  background-color:yellow;
+  background-color:#827eff;
+  color:black;
 }
 .new {
   color:red
@@ -37,8 +38,15 @@ input[name="submit"] {
   background-color:green;
 }
 button {
+  margin:0.8em;
   border-radius:5px;
   color:purple;
   background-color:orange;
   cursor:crosshair
+}
+.button_bar {
+  width:315px;
+  display:inline-block;
+  display:flex;
+  justify-content:space-between;
 }

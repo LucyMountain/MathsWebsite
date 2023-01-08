@@ -1,12 +1,12 @@
-import json
-
-from django.http import HttpResponse
-from django.shortcuts import render
 import numpy as np
-#from solver import Cell, evaluate_grid
+from django.http import HttpResponse
+from django.shortcuts import render, redirect
 
 # Create your views here.
 from sudoku.solver import Cell, evaluate_grid
+
+
+# from solver import Cell, evaluate_grid
 
 
 def index(request):
@@ -65,6 +65,7 @@ def solve(request):
             original[letters[row]+str(column)] = "sudoku_cell new" if len(i) == 0 else "sudoku_cell"
             v = int(i) if len(i) > 0 else 0
             grid[row, column] = Cell(v, ([1, 2, 3, 4, 5, 6, 7, 8, 9] if v == 0 else []), row, column)
+
     solved = evaluate_grid(grid)
     grid = {}
     for row in range(9):
@@ -73,4 +74,9 @@ def solve(request):
     context = {'grid': grid,
                'original': original
                }
-    return render(request, 'sudoku/grid.html', context)
+    return redirect('sudoku:error') #todo: this is silly
+#    return render(request, 'sudoku/grid.html', context)
+
+
+def user_error(request):
+    return render(request, 'sudoku/error.html')

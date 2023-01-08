@@ -98,12 +98,10 @@ def evaluate_grid(grid):
         if not changed_grid:
             time_since_last_change += 1
         if time_since_last_change == 3:
-            print('WHEYEYEYYEYy')
             done = False
             for x in range(9):
                 for y in range(9):
                     if len(grid[x, y].potential_values) > 0:
-                        print(x, y)
                         done = True
                         for value in grid[x, y].potential_values:
                             if grid[x, y].check_if_cell_can_have_value(grid, value):
@@ -112,7 +110,6 @@ def evaluate_grid(grid):
                                 new_grid[x, y].potential_values = []
                                 evaluated_grid = evaluate_grid(new_grid)
                                 if evaluated_grid is not None:
-                                    print('Hello')
                                     grid = evaluated_grid
                                 time_since_last_change = 0
                     if done:
