@@ -25,6 +25,17 @@ def test_example(request):
         [0, 5, 0, 0, 0, 0, 8, 0, 0],
         [0, 3, 0, 0, 0, 6, 0, 0, 0]
     ]
+    test_grid = [
+        [9, "", 1, "", "", 5, 4, 8, ""],
+        ["", "", "", 2, "", "", "", 7, ""],
+        ["", 8, "", "", "", "", "", "", ""],
+        [4, "", 6, "", "", 9, 1, "", ""],
+        [3, "", "", "", "", "", "", "", ""],
+        ["", "", "", "", 5, "", "", "", 9],
+        [6, "", 8, "", 7, "", "", 4, ""],
+        ["", 5, "", "", "", "", 8, "", ""],
+        ["", 3, "", "", "", 6, "", "", ""]
+    ]
     grid = {}
     letters = list("ABCDEFGHI")
     for row in range(9):
@@ -36,25 +47,20 @@ def test_example(request):
 
 def solve(request):
     grid = np.empty((9, 9), dtype=Cell)
+    original = {}
     letters = list("ABCDEFGHI")
     for row in range(9):
         for column in range(9):
             i = request.POST[letters[row] + str(column)]
+            original[letters[row]+str(column)] = "sudoku_cell" if len(i) == 0 else "new"
             v = int(i) if len(i) > 0 else 0
             grid[row, column] = Cell(v, ([1, 2, 3, 4, 5, 6, 7, 8, 9] if v == 0 else []), row, column)
     solved = evaluate_grid(grid)
-    """
-    solved_grid = []
-    for r in range(9):
-        row = []
-        for c in range(9):
-            row.append(solved[r][c].value)
-        solved_grid.append(row)
-    """
     grid = {}
-    letters = list("ABCDEFGHI")
     for row in range(9):
         for column in range(9):
             grid[letters[row]+str(column)] = solved[row][column].value
-    context = {'grid': grid}
+    context = {'grid': grid,
+               'original':original
+               }
     return render(request, 'sudoku/grid.html', context)

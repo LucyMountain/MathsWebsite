@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 {% load static %}
 {% load filters %}
+<link rel="stylesheet" type="text/css" href="{% static 'sudoku/style.css' %}">
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,13 +15,13 @@
       <tr>
         {% for n in "012345678" %}
         <td>
-          <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="{{ grid|letter:l|number:n }}" class="square" maxlength="1" size="1">
+          <input id="{{l}}{{n}}" type="text" name="{{l}}{{n}}" value="{{ grid|letter:l|number:n }}" maxlength="1" size="1" class="sudoku_cell">
         </td>
         {% endfor %}
       </tr>
       {% endfor %}
     </table>
-  <input type="submit" value="Submit">
+  <input type="submit" value="Submit" name="submit">
   </form>
 </body>
 </html>

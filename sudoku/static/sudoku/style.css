@@ -1,0 +1,35 @@
+
+table {
+  border-spacing:0px;
+}
+td {
+  border:1px solid;
+}
+td:first-child {
+  border-left:solid;
+}
+td:nth-child(3n) {
+  border-right:solid ;
+}
+tr:first-child td {
+  border-top:solid;
+}
+tr:nth-child(3n) td {
+  border-bottom:solid ;
+}
+.sudoku_cell {
+  height:30px;
+  width:30px;
+  text-align:center;
+  border:0px solid;
+  padding:0px 0px 0px 0px;
+  background-color:yellow;
+}
+.sudoku_cell.new {
+  color:red
+}
+input[name="submit"]{
+  margin:0em auto;
+  color:red;
+  background-color:green;
+}
