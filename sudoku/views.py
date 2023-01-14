@@ -74,8 +74,8 @@ def solve(request):
     context = {'grid': grid,
                'original': original
                }
-    return redirect('sudoku:error') #todo: this is silly
-#    return render(request, 'sudoku/grid.html', context)
+#    return redirect('sudoku:error') #todo: this is silly
+    return render(request, 'sudoku/grid.html', context)
 
 
 def user_error(request):

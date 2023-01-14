@@ -119,3 +119,5 @@ def evaluate_grid(grid):
     return grid
 
 
+def check_grid(grid):
+    pass
