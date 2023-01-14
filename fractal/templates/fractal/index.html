@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}Fractal{% endblock title %}
+
+{% block content %}
+    <button onclick="location.href='{% url 'sudoku:index' %}'">New Sudoku</button>
+    <button form="sudoku_entry">Submit</button>
+    <button onclick="location.href='{% url 'sudoku:test' %}'">Test Sudoku</button>
+  </div>
+{% endblock content %}

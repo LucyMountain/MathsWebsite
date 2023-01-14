@@ -17,7 +17,9 @@ from django.contrib import admin
 from django.urls import path, include
 
 urlpatterns = [
+    path('', include('homepage.urls')),
     path('sudoku/', include('sudoku.urls')),
     path('polls/', include('polls.urls')),
+    path('fractal/', include('fractal.urls')),
     path('admin/', admin.site.urls),
 ]

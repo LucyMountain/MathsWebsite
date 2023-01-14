@@ -1,13 +1,12 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends 'base.html' %}
 {% load filters %}
-<link rel="stylesheet" type="text/css" href="{% static 'sudoku/style.css' %}">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Sudoku</title>
-</head>
-<body>
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}Sudoku{% endblock title %}
+
+{% block content %}
   <form id="sudoku_entry" method="POST" action="{% url 'sudoku:solve' %}">
   {% csrf_token %}
     <table>
@@ -27,5 +26,4 @@
     <button form="sudoku_entry">Submit</button>
     <button onclick="location.href='{% url 'sudoku:test' %}'">Test Sudoku</button>
   </div>
-</body>
-</html>
+{% endblock content %}
