@@ -1,17 +1,15 @@
-<!DOCTYPE html>
-{% load static %}
+{% extends 'base.html' %}
 {% load filters %}
-<link rel="stylesheet" type="text/css" href="{% static 'sudoku/style.css' %}">
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Error</title>
-</head>
-<body>
-<h1>u r dumbass</h1>
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}Error{% endblock title %}
+
+{% block content %}
+  <h1>u r dumbass</h1>
   <div class="button_bar">
     <button onclick="location.href='{% url 'sudoku:index' %}'">New Sudoku</button>
     <button onclick="location.href='{% url 'sudoku:test' %}'">Test Sudoku</button>
   </div>
-</body>
-</html>
+{% endblock content %}

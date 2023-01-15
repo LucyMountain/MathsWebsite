@@ -11,11 +11,25 @@
         <title> App | {% block title %} {% endblock title %}</title>
     </head>
     <body>
-        <div class="ui secondary  menu">
-            <a class="item"><img style="height:100px;width:100px;" src="{% static 'book.jpg' %}" alt=""></a>
-            <a href="/" class="  active item">Home</a>
+        <div class="navigation_bar">
+<!--            <img style="height:100px;width:100px" src="{% static 'maths_icon.png' %}">-->
+<!--            <button onclick="location.href='{% url 'polls:index' %}'" class="maths_icon"><img src="{% static 'maths_icon.png' %}" class="maths_icon"></button>-->
+            <img src="{% static 'maths_icon.png' %}" class="maths_icon" onclick="location.href='{% url 'homepage:index' %}'">
+            <button onclick="location.href='{% url 'polls:index' %}'" class="button-89">Polls</button>
+            <button onclick="location.href='{% url 'sudoku:index' %}'" class="button-89">Sudoku Solver</button>
+            <button onclick="location.href='{% url 'fractal:sierpinski' %}'" class="button-89">Fractal</button>
+            <div class="login_menu">
+                <img style="height:40px;width:40px" src="{% static 'user_icon.png' %}" alt="My image" id="user_image">
+                <div>
+                    <div>Signed in as</div>
+                    <div>{{user.username}}</div>
+                    <div>&nbsp</div>
+                    <a href="/accounts/login" style="text-decoration: none;">Log in</a>
+                    <a href="/accounts/logout" style="text-decoration: none;">Log out</a>
+                </div>
+            </div>
         </div>
-        <div class="container mb-3 mt-3">
+        <div class="container">
             {% block content %}
             {% endblock content %}
         </div>

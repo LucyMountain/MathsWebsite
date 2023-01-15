@@ -1,6 +1,7 @@
 
 body {
   background-color:#b6ebd5;
+  margin:0em;
 }
 table {
   border-spacing:0px;
@@ -49,4 +50,132 @@ button {
   display:inline-block;
   display:flex;
   justify-content:space-between;
+}
+.navigation_bar {
+  width:100%;
+  background-color:#827eff;
+  position:relative;
+  display:flex;
+  align-items:center;
+}
+.maths_icon {
+  width:10%;
+  margin:0.5%;
+  display:flex;
+  float:left;
+  cursor:crosshair;
+}
+.login_menu {
+    display:flex;
+    float:right;
+    position:fixed;
+    right:2%;
+    text-align:right;
+    width:25%;
+    font-family:'Arial',sans-serif;
+}
+.login_menu:hover {
+    display:static;
+    background:#555;
+    color:#fff;
+    z-index:1;
+}
+.login_menu div {
+    width:auto;
+    -webkit-box-shadow:none;
+    -moz-box-shadow:none;
+    box-shadow:none;
+    display:none;
+    opacity:0;
+    visibility:hidden;
+    -webkit-transiton:opacity 0.2s;
+    -moz-transition:opacity 0.2s;
+    -ms-transition:opacity 0.2s;
+    -o-transition:opacity 0.2s;
+    -transition:opacity 0.2s;
+    font-family:inherit;
+    border:1px solid #fff;
+    border-radius:2px;
+    padding:0.5%;
+}
+.login_menu div a {
+    background:#555;
+    display:block;
+    color:#fff;
+    text-shadow:0 -1px 0 #000;
+    text-align:left;
+    right:0;
+    font-family:inherit;
+}
+.login_menu div a:hover { background:#666; }
+.login_menu:hover div {
+    display:block;
+    width:auto;
+    opacity:1;
+    visibility:visible;
+    font-size:var(--text-font-size);
+}
+.login_menu div div {
+    background:#fff;
+    display:block;
+    color:#000;
+    text-shadow:0 -1px 0 #000;
+    text-align:left;
+    right:0;
+}
+
+.centre {
+  display:block;
+  margin-left:auto;
+  margin-right:auto;
+  width:90%;
+}
+
+.button-89 {
+  --b:3px;   /* border thickness */
+  --s:.45em; /* size of the corner */
+  --color:#373B44;
+
+  padding:calc(.5em + var(--s)) calc(.9em + var(--s));
+  color:var(--color);
+  --_p:var(--s);
+  background:
+    conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
+    var(--_p) var(--_p)/calc(100% - var(--b) - 2*var(--_p)) calc(100% - var(--b) - 2*var(--_p));
+  transition:.3s linear, color 0s, background-color 0s;
+  outline:var(--b) solid #0000;
+  outline-offset:.6em;
+  font-size:16px;
+
+  border:0;
+
+  user-select:none;
+  -webkit-user-select:none;
+  touch-action:manipulation;
+
+  display:flex;
+  float:left;
+
+
+}
+
+.button-89:hover,
+.button-89:focus-visible{
+  --_p:0px;
+  outline-color:var(--color);
+  outline-offset:.05em;
+}
+
+.button-89:active {
+  background:var(--color);
+  color:#fff;
+}
+.container {
+  margin:2% 2% 2% 2%;
+}
+
+.progress {
+  color:red;
+  height:1%;
+  width:80%;
 }

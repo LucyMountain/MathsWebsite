@@ -18,6 +18,7 @@ def get_graph():
 
 
 def get_triangle():
+    pyplot.close()
     corners_x = [0, 1, 1/2]
     corners_y = [0, 0, (3**0.5)/2]
     x_coords = corners_x

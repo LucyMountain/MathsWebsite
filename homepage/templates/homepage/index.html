@@ -1,12 +1,10 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Title</title>
-</head>
-<body>
-<button onclick="location.href='{% url 'polls:index' %}'">Polls</button>
-<button onclick="location.href='{% url 'sudoku:index' %}'">Sudoku Solver</button>
-<button onclick="location.href='{% url 'fractal:sierpinski' %}'">Fractal</button>
-</body>
-</html>
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}Home{% endblock title %}
+
+{% block content %}
+{% endblock content %}
