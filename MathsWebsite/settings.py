@@ -32,6 +32,7 @@ ALLOWED_HOSTS = []
 
 INSTALLED_APPS = [
     'homepage.apps.HomepageConfig',
+    'game.apps.GameConfig',
     'sudoku.apps.SudokuConfig',
     'polls.apps.PollsConfig',
     'fractal.apps.FractalConfig',

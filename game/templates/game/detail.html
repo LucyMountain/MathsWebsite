@@ -1,0 +1,29 @@
+{% extends 'base.html' %}
+{% load filters %}
+
+{% block scripts %}
+{% endblock scripts %}
+
+{% block title %}{{ question }}{% endblock title %}
+
+{% block content %}
+    <div class="progress-bar">
+    <!-- Width based on the number of percentages -->
+        <div class="progress-bar__progress" style="width: 40%;">
+            <!-- The number of percentages -->
+            40%
+        </div>
+    </div>
+    <h3>{{ question.question_text }}</h3>
+
+    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+
+    <form action="{% url 'game:vote' question.id %}" method="post">
+    {% csrf_token %}
+    {% for choice in question.choice_set.all %}
+        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Vote">
+    </form>
+{% endblock content %}
