@@ -7,23 +7,27 @@
 {% block title %}{{ question }}{% endblock title %}
 
 {% block content %}
-    <div class="progress-bar">
-    <!-- Width based on the number of percentages -->
-        <div class="progress-bar__progress" style="width: 40%;">
-            <!-- The number of percentages -->
-            40%
+    {% if accuracy > -1 %}
+        <div class="progress-bar">
+        <!-- Width based on the number of percentages -->
+            <div class="progress-bar__progress" style="width: {{ accuracy }}%;">progress</div>
+            Accuracy: {{ accuracy }}
         </div>
-    </div>
-    <h3>{{ question.question_text }}</h3>
+    {% endif %}
+    <h3>{{ question.number }}) {{ question.question_text }}</h3>
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form action="{% url 'game:vote' question.id %}" method="post">
+    <form action="{% url 'game:answer' game.id player.id question.id %}" method="post">
     {% csrf_token %}
-    {% for choice in question.choice_set.all %}
-        <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
-        <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
-    {% endfor %}
-    <input type="submit" value="Vote">
+    {% if question.choice_set.all.count > 0 %}
+        {% for choice in question.choice_set.all %}
+            <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
+            <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
+        {% endfor %}
+    {% else %}
+        <input type="text" id="text_input">
+    {% endif %}
+    <input type="submit" value="Submit">
     </form>
 {% endblock content %}

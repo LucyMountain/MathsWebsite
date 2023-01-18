@@ -4,16 +4,12 @@
 {% block scripts %}
 {% endblock scripts %}
 
-{% block title %}Game{% endblock title %}
+{% block title %}Results{% endblock title %}
 
 {% block content %}
-    <h1>{{ question.question_text }}</h1>
+    <h1>{{ game.game_name }}</h1>
+    <h2>Results: {{ player.questions_correct }}/{{ Question.objects.filter(game=Game).count }}</h2>
+    <h2>{{ accuracy }}</h2>
 
-    <ul>
-    {% for choice in question.choice_set.all %}
-        <li>{{ choice.choice_text }} -- {{ choice.votes }} vote{{ choice.votes|pluralize }}</li>
-    {% endfor %}
-    </ul>
-
-    <a href="{% url 'game:detail' question.id %}">Vote again?</a>
+<button onclick="location.href='{% url 'game:index' %}'" class="button-89">Play another Game?</button>
 {% endblock content %}

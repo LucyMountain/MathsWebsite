@@ -7,13 +7,13 @@
 {% block title %}Game{% endblock title %}
 
 {% block content %}
-    {% if latest_question_list %}
+    {% if game_list.count > 0 %}
         <ul>
-        {% for question in latest_question_list %}
-            <li><a href="{% url 'game:detail' question.id %}">{{ question.question_text }}</a></li>
+        {% for game in game_list %}
+            <li><h3>{{ game.game_name }}</h3><button onclick="location.href='{% url 'game:start' game.id %}'" class="button-89">Start</button></li>
         {% endfor %}
         </ul>
     {% else %}
-        <p>No questions are available.</p>
+        <p>No games are available.</p>
     {% endif %}
 {% endblock content %}

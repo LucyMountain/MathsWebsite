@@ -1,3 +1,6 @@
+:root {
+  --progress_bar_colour:#4665ff;
+}
 
 body {
   background-color:#b6ebd5;
@@ -235,8 +238,8 @@ button {
   justify-content: center;
 
     /* Colors */
-  background-color: #4665ff;
-  color: #fff;
+  background-color: var(--progress_bar_colour);
+  color: var(--progress_bar_colour);
 
     /* Rounded border */
   border-radius: 9999px;
