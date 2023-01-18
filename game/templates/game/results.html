@@ -8,8 +8,8 @@
 
 {% block content %}
     <h1>{{ game.game_name }}</h1>
-    <h2>Results: {{ player.questions_correct }}/{{ Question.objects.filter(game=Game).count }}</h2>
-    <h2>{{ accuracy }}</h2>
+    <h2>Results: {{ player.questions_correct }}/{{ questions_count }}</h2>
+    <h2>{{ accuracy }}%</h2>
 
 <button onclick="location.href='{% url 'game:index' %}'" class="button-89">Play another Game?</button>
 {% endblock content %}

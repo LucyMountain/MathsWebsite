@@ -16,7 +16,7 @@ class Game(models.Model):
 
 
 class Player(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, related_name="players", on_delete=models.CASCADE)
     question_number = models.IntegerField(default=0)
     questions_correct = models.IntegerField(default=0)
 
@@ -25,7 +25,7 @@ class Player(models.Model):
 
 
 class Question(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)
+    game = models.ForeignKey(Game, related_name="questions", on_delete=models.CASCADE)
     error = models.CharField(max_length=200)
     question_text = models.CharField(max_length=200)
     number = models.IntegerField(default=0)
@@ -39,7 +39,7 @@ class Question(models.Model):
 
 
 class Answer(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name="answers", on_delete=models.CASCADE)
     answer_text = models.CharField(max_length=200)
 
     def __str__(self):
@@ -47,7 +47,7 @@ class Answer(models.Model):
 
 
 class Choice(models.Model):
-    question = models.ForeignKey(Question, on_delete=models.CASCADE)
+    question = models.ForeignKey(Question, related_name="choices", on_delete=models.CASCADE)
     choice_text = models.CharField(max_length=200)
 
     def __str__(self):

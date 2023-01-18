@@ -10,9 +10,11 @@
     {% if accuracy > -1 %}
         <div class="progress-bar">
         <!-- Width based on the number of percentages -->
-            <div class="progress-bar__progress" style="width: {{ accuracy }}%;">progress</div>
-            Accuracy: {{ accuracy }}
+            {% if accuracy > 0 %}
+                <div class="progress-bar__progress" style="width: {{ accuracy }}%;">progress</div>
+            {% endif %}
         </div>
+    Accuracy: {{ accuracy }}%
     {% endif %}
     <h3>{{ question.number }}) {{ question.question_text }}</h3>
 
@@ -20,13 +22,13 @@
 
     <form action="{% url 'game:answer' game.id player.id question.id %}" method="post">
     {% csrf_token %}
-    {% if question.choice_set.all.count > 0 %}
-        {% for choice in question.choice_set.all %}
+    {% if choice_set.count > 0 %}
+        {% for choice in choice_set %}
             <input type="radio" name="choice" id="choice{{ forloop.counter }}" value="{{ choice.id }}">
             <label for="choice{{ forloop.counter }}">{{ choice.choice_text }}</label><br>
         {% endfor %}
     {% else %}
-        <input type="text" id="text_input">
+        <input type="text" id="text_input" name="text_input">
     {% endif %}
     <input type="submit" value="Submit">
     </form>

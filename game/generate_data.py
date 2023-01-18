@@ -53,7 +53,7 @@ Answer.objects.create(
 
 question_3 = Question.objects.create(
     game=game_1,
-    question_text="What is root 91?",
+    question_text="What is root 81?",
     number=3,
     pub_date=timezone.now() + datetime.timedelta(days=1),
     error=""

@@ -1,3 +1,4 @@
+from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
@@ -21,17 +22,19 @@ def start(request, game_id):
         question_number=0,
         questions_correct=0
     )
-    return HttpResponseRedirect(reverse('game:next_question', args=(game.id, player.id, None)))
+    return HttpResponseRedirect(reverse('game:next_question', args=(game.id, player.id)))
 
 
 def results(request, game_id, player_id):
-    game = get_object_or_404(Question, pk=game_id)
+    game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=player_id)
-    accuracy = (player.questions_correct // player.question_number) * 100
+    accuracy = int((player.questions_correct / player.question_number) * 100)
+    questions = Question.objects.filter(game=game).count
     context = {
         'game': game,
         'player': player,
         'accuracy': accuracy,
+        'questions_count':questions
     }
     return render(request, 'game/results.html', context)
 
@@ -39,16 +42,18 @@ def results(request, game_id, player_id):
 def detail(request, game_id, player_id, question_id):
     game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=player_id)
-    question = get_object_or_404(Player, pk=question_id)
-    if player.question_number > 0:
-        accuracy = (player.questions_correct // player.question_number) * 100
+    question = get_object_or_404(Question, pk=question_id)
+    if player.question_number > 1:
+        accuracy = int((player.questions_correct / (player.question_number - 1)) * 100)
     else:
         accuracy = -1
+    choice_set = Choice.objects.filter(question=question)
     context = {
         'game': game,
         'player': player,
         'accuracy': accuracy,
         'question': question,
+        'choice_set': choice_set
     }
     if len(question.error) > 0:
         context['error'] = question.error
@@ -59,10 +64,12 @@ def next_question(request, game_id, player_id):
     game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=player_id)
     player.question_number += 1
-    if player.question_number > Question.objects.filter(game=Game).count:
+#    count= Question.objects.all().filter(game=game).count()
+    if player.question_number > Question.objects.all().filter(game=game).count():
         return HttpResponseRedirect(reverse('game:results', args=(game.id, player.id)))
     else:
         question = get_object_or_404(Question, number=player.question_number, game=game)
+    player.save()
     return HttpResponseRedirect(reverse('game:detail', args=(game_id, player_id, question.id)))
 
 
@@ -70,10 +77,10 @@ def answer(request, game_id, player_id, question_id):
     game = get_object_or_404(Game, pk=game_id)
     player = get_object_or_404(Player, pk=player_id)
     question = get_object_or_404(Question, pk=question_id)
-    correct_answer = get_object_or_404(Answer, question=question)
-    if Choice.objects.filter(question=question).count > 0:
+    correct_answer = get_object_or_404(Answer, question=question).answer_text
+    if Choice.objects.filter(question=question).count() > 0:
         try:
-            selected_choice = question.choice_set.get(pk=request.POST['choice'])
+            selected_choice = get_object_or_404(Choice, pk=request.POST['choice'])
         except (KeyError, Choice.DoesNotExist):
             question.error = "You didn't select an option."
             return HttpResponseRedirect(reverse('game:detail', args=(game.id, player.id, question.id)))
@@ -88,9 +95,6 @@ def answer(request, game_id, player_id, question_id):
         # Always return an HttpResponseRedirect after successfully dealing
         # with POST data. This prevents data from being posted twice if a
         # user hits the Back button.
+    player.save()
     return HttpResponseRedirect(reverse('game:next_question', args=(game.id, player.id)))
 
-
-# todo: change progress bar to be quiz progress and add accuracy underneath
-# todo: change quiz setup to be questions and then results at end
-# todo: change quiz menu to show game and play etc.
