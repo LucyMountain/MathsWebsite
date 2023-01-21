@@ -89,8 +89,7 @@ def start(request, game_name):
     return HttpResponseRedirect(reverse('game:game_engine'))
 
 
-# todo: game homepage is garbage - fix with fancy new button and list in boxes with start on the right
 # todo: add concept of user and make player have a name
 # todo: screen which displays if you are correct or not with next button
 # todo: neaten detail, results css with nice choice buttons etc
-# todo: neaten css file etc
+# todo: neaten css file etc eg dark colour 1etc

@@ -1,10 +1,69 @@
 :root {
   --progress_bar_colour:#4665ff;
+  --navigation_bar_old:#827eff;
+  --body_old:#b6ebd5;
+  --dark_sienna:#210203;
+  --copper_red:#c17767;
+  --tan:#d3b99f;
+  --cerulean_frost:#6d98ba;
+  --cadet_grey:#9aadbf;
+  --ebony:#626d58;
+  --english_violet:#51355a;
+  --violet_blue_crayola:#7e78d2;
+  --cobalt_blue:#1446a0;
+  --dark_blue_grey:#6c6ea0;
+  --tiffany_blue:#3cbbb1;
+  --russian_violet:#392759;
+  --medium_slate_blue:#6874e8;
+  --alice_blue:#e8f0ff;
+  --carnation_pink:#f7accf;
+  --deep_taupe:#7a5c61;
+  --royal_dark_blue:#0a2463;
+  --charcoal:#2f3e46;
+  --dark_slate_grey:#354f52;
+  --hookers_green:#52796f;
+  --dark_sea_green:#84a98c;
+  --ash_gray:#cad2c5;
+  --little_boy_blue:#89a6fb;
+  --dark_purple:#270722;
+  --barn_red:#720e07;
+  --light_pink:#f4acb7;
+  --a:#e4e3df;
+  --b:#857360;
+  --c:#b94146;
+  --d:#718c9f;
+  --e:#4c4f36;
+
+  --bar_colour:var(--charcoal);
+  --button_colour:var(--hookers_green);
+  --text_colour:var(--ash_gray);
+  --background_colour:var(--dark_sea_green);
+  --content_colour:var(--dark_slate_grey);
+
+  --bar_colour:var(--dark_sienna);
+  --button_colour:var(--copper_red);
+  --text_colour:var(--tan);
+  --background_colour:var(--cerulean_frost);
+  --content_colour:var(--tan);
+
+  --bar_colour:var(--russian_violet);
+  --button_colour:var(--medium_slate_blue);
+  --text_colour:var(--alice_blue);
+  --background_colour:var(--carnation_pink);
+  --content_colour:var(--royal_dark_blue);
+
+  --bar_colour:var(--e);
+  --button_colour:var(--c);
+  --text_colour:var(--a);
+  --background_colour:var(--b);
+  --content_colour:var(--d);
+  --content_text_colour:#2d2f20;
 }
 
 body {
-  background-color:#b6ebd5;
+  background-color:var(--background_colour);
   margin:0em;
+  color:var(--content_text_colour);
 }
 table {
   border-spacing:0px;
@@ -44,9 +103,12 @@ input[name="submit"] {
 button {
   margin:0.8em;
   border-radius:5px;
-  color:purple;
-  background-color:orange;
-  cursor:crosshair
+  color:var(--text_colour);
+  background-color:var(--button_colour);
+  cursor:crosshair;
+  border:0;
+  padding: 0.8% 3.6% 0.8% 3.6%;
+  font-size:100%;
 }
 .button_bar {
   width:315px;
@@ -56,7 +118,7 @@ button {
 }
 .navigation_bar {
   width:100%;
-  background-color:#827eff;
+  background-color:var(--bar_colour);
   position:relative;
   display:flex;
   align-items:center;
@@ -137,10 +199,11 @@ button {
 .button-89 {
   --b:3px;   /* border thickness */
   --s:.45em; /* size of the corner */
-  --color:#373B44;
+  --color:var(--button_colour);
+  --text_color:var(--text_colour);
 
   padding:calc(.5em + var(--s)) calc(.9em + var(--s));
-  color:var(--color);
+  color:var(--text_color);
   --_p:var(--s);
   background:
     conic-gradient(from 90deg at var(--b) var(--b),#0000 90deg,var(--color) 0)
@@ -202,11 +265,10 @@ button {
 
 .game_listing {
   width:94%;
-  background-color: yellow;
+  background-color: var(--content_colour);
   border-radius: 25px;
   display:flex;
   align-items:center;
-  color: red;
   margin:0 0 2% 0;
   padding: 0 3% 0 3%;
 }
@@ -214,19 +276,4 @@ button {
   cursor:crosshair;
   position:fixed;
   right:4%;
-}
-
-.game_listing2 {
-  position:relative;
-  display:flex;
-  align-items:center;
-  margin:0 0 2% 0;
-  padding:0 0 0 5%;
-}
-.game_listing__button2 {
-  cursor:crosshair;
-  float:right;
-  position:fixed;
-  right:2%;
-  text-align:right;
 }
