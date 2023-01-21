@@ -8,11 +8,12 @@
 
 {% block content %}
     {% if game_list.count > 0 %}
-        <ul>
         {% for game in game_list %}
-            <li><h3>{{ game.game_name }}</h3><button onclick="location.href='{% url 'game:start' game.game_name %}'" class="button-89">Start</button></li>
+            <div class="game_listing">
+                <h3>{{ game.game_name }}</h3>
+                <button onclick="location.href='{% url 'game:start' game.game_name %}'" class="game_listing__button">Start</button>
+            </div>
         {% endfor %}
-        </ul>
     {% else %}
         <p>No games are available.</p>
     {% endif %}
