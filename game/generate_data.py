@@ -27,7 +27,6 @@ question_1 = Question.objects.create(
     question_text="What is the answer to life the universe and everything?",
     number=1,
     pub_date=timezone.now(),
-    error=""
 )
 Answer.objects.create(
     question=question_1,
@@ -44,7 +43,6 @@ question_2 = Question.objects.create(
     question_text="What is the answer.",
     number=2,
     pub_date=timezone.now() + datetime.timedelta(days=1),
-    error=""
 )
 Answer.objects.create(
     question=question_2,
@@ -56,7 +54,6 @@ question_3 = Question.objects.create(
     question_text="What is root 81?",
     number=3,
     pub_date=timezone.now() + datetime.timedelta(days=1),
-    error=""
 )
 Answer.objects.create(
     question=question_3,
@@ -74,7 +71,6 @@ question_1 = Question.objects.create(
     question_text="Wrong one :((",
     number=1,
     pub_date=timezone.now(),
-    error=""
 )
 Answer.objects.create(
     question=question_1,

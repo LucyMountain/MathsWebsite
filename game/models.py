@@ -15,18 +15,8 @@ class Game(models.Model):
         return self.game_name
 
 
-class Player(models.Model):
-    game = models.ForeignKey(Game, related_name="players", on_delete=models.CASCADE)
-    question_number = models.IntegerField(default=0)
-    questions_correct = models.IntegerField(default=0)
-
-    def __str__(self):
-        return self.player_id
-
-
 class Question(models.Model):
     game = models.ForeignKey(Game, related_name="questions", on_delete=models.CASCADE)
-    error = models.CharField(max_length=200)
     question_text = models.CharField(max_length=200)
     number = models.IntegerField(default=0)
     pub_date = models.DateTimeField('date published')

@@ -20,7 +20,7 @@
 
     {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
 
-    <form action="{% url 'game:answer' game.id player.id question.id %}" method="post">
+    <form action="{% url 'game:game_engine' %}" method="post">
     {% csrf_token %}
     {% if choice_set.count > 0 %}
         {% for choice in choice_set %}
