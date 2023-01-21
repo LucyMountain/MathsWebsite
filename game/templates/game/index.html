@@ -10,7 +10,7 @@
     {% if game_list.count > 0 %}
         <ul>
         {% for game in game_list %}
-            <li><h3>{{ game.game_name }}</h3><button onclick="location.href='{% url 'game:start' game.id %}'" class="button-89">Start</button></li>
+            <li><h3>{{ game.game_name }}</h3><button onclick="location.href='{% url 'game:start' game.game_name %}'" class="button-89">Start</button></li>
         {% endfor %}
         </ul>
     {% else %}

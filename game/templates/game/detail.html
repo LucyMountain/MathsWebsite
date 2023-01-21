@@ -18,7 +18,7 @@
     {% endif %}
     <h3>{{ question.number }}) {{ question.question_text }}</h3>
 
-    {% if error_message %}<p><strong>{{ error_message }}</strong></p>{% endif %}
+    {% if error %}<p><strong>{{ error }}</strong></p>{% endif %}
 
     <form action="{% url 'game:game_engine' %}" method="post">
     {% csrf_token %}
