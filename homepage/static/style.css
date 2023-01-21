@@ -199,18 +199,31 @@ button {
     /* Rounded border */
   border-radius: 9999px;
 }
+
 .game_listing {
-  width:100%;
-  border-radius: 25px;
+  width:94%;
   background-color: yellow;
+  border-radius: 25px;
+  display:flex;
+  align-items:center;
   color: red;
+  margin:0 0 2% 0;
+  padding: 0 3% 0 3%;
+}
+.game_listing__button {
+  cursor:crosshair;
+  position:fixed;
+  right:4%;
+}
+
+.game_listing2 {
   position:relative;
   display:flex;
   align-items:center;
   margin:0 0 2% 0;
   padding:0 0 0 5%;
 }
-.game_listing__button {
+.game_listing__button2 {
   cursor:crosshair;
   float:right;
   position:fixed;
