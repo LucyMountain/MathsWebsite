@@ -59,7 +59,12 @@ def game_engine(request):
                 else:
                     input_answer = selected_choice.choice_text
             else:
-                input_answer = request.POST["text_input"]
+                if "text_input" in request.POST:
+                    input_answer = request.POST["text_input"]
+                else:
+                    request.session['error'] = "You didn't submit an answer."
+                    request.session['state'] = GameState.DETAIL.value
+                    return HttpResponseRedirect(reverse('game:game_engine'))
                 input_answer = input_answer.lower()
                 correct_answer = correct_answer.lower()
             if correct_answer == input_answer:
@@ -92,4 +97,5 @@ def start(request, game_name):
 # todo: add concept of user and make player have a name
 # todo: screen which displays if you are correct or not with next button
 # todo: neaten detail, results css with nice choice buttons etc
-# todo: neaten css file etc eg dark colour 1etc
+# todo: neaten css file etc
+# todo: what on earth happens when you full screen?

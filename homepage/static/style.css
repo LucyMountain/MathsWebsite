@@ -1,32 +1,17 @@
 :root {
-  --progress_bar_colour:#4665ff;
-  --navigation_bar_old:#827eff;
-  --body_old:#b6ebd5;
   --dark_sienna:#210203;
   --copper_red:#c17767;
   --tan:#d3b99f;
   --cerulean_frost:#6d98ba;
-  --cadet_grey:#9aadbf;
-  --ebony:#626d58;
-  --english_violet:#51355a;
-  --violet_blue_crayola:#7e78d2;
-  --cobalt_blue:#1446a0;
-  --dark_blue_grey:#6c6ea0;
-  --tiffany_blue:#3cbbb1;
   --russian_violet:#392759;
   --medium_slate_blue:#6874e8;
   --alice_blue:#e8f0ff;
   --carnation_pink:#f7accf;
-  --deep_taupe:#7a5c61;
   --royal_dark_blue:#0a2463;
   --charcoal:#2f3e46;
-  --dark_slate_grey:#354f52;
   --hookers_green:#52796f;
   --dark_sea_green:#84a98c;
   --ash_gray:#cad2c5;
-  --little_boy_blue:#89a6fb;
-  --dark_purple:#270722;
-  --barn_red:#720e07;
   --light_pink:#f4acb7;
   --a:#e4e3df;
   --b:#857360;
@@ -38,7 +23,7 @@
   --button_colour:var(--hookers_green);
   --text_colour:var(--ash_gray);
   --background_colour:var(--dark_sea_green);
-  --content_colour:var(--dark_slate_grey);
+  --content_colour:var(--light_pink);
 
   --bar_colour:var(--dark_sienna);
   --button_colour:var(--copper_red);
@@ -57,13 +42,13 @@
   --text_colour:var(--a);
   --background_colour:var(--b);
   --content_colour:var(--d);
-  --content_text_colour:#2d2f20;
+  --content_colour_2:#2d2f20;
 }
 
 body {
   background-color:var(--background_colour);
   margin:0em;
-  color:var(--content_text_colour);
+  color:var(--content_colour_2);
 }
 table {
   border-spacing:0px;
@@ -242,7 +227,7 @@ button {
 
 .progress-bar {
     /* Colors */
-  background-color: #d1d5db;
+  background-color: var(--content_colour_2);
 
     /* Rounded border */
   border-radius: 9999px;
@@ -256,8 +241,8 @@ button {
   justify-content: center;
 
     /* Colors */
-  background-color: var(--progress_bar_colour);
-  color: var(--progress_bar_colour);
+  background-color: var(--content_colour);
+  color: var(--content_colour);
 
     /* Rounded border */
   border-radius: 9999px;
