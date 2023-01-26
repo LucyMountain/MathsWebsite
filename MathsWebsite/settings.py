@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/4.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/4.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
@@ -20,12 +20,51 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-opgo32w%5g%q@c^2412y(-8c#707t2brkqhvm==nke2m53or0^'
+with open(os.path.join(BASE_DIR, 'MathsWebsite/etc', 'environment.txt')) as f:
+    ENVIRONMENT = f.read().strip()
 
+with open(os.path.join(BASE_DIR, 'MathsWebsite/etc', 'secret_key.txt')) as f:
+    SECRET_KEY = f.read().strip()
+
+#ENVIRONMENT = "Prod"
+DJANGO_CONFIGURATION = 'Dev' if ENVIRONMENT == "DEV" else "Prod"
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+if DJANGO_CONFIGURATION == 'Dev':
+    # !!! USE THIS CONFIGURATION FOR DEVELOPMENT !!!
+    DEBUG = True
+    ALLOWED_HOSTS = []
 
-ALLOWED_HOSTS = []
+    # Email for password reset
+    EMAIL_BACKEND = 'django.core.mail.backends.filebased.EmailBackend'
+    EMAIL_FILE_PATH = os.path.join(BASE_DIR, 'sent_emails')
+    ''' Uncomment for local mail server
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'localhost'
+    EMAIL_USE_TLS = False
+    EMAIL_USE_SSL = False
+    EMAIL_PORT = 1025
+    EMAIL_HOST_USER = 'admin@mammath.org'
+    EMAIL_HOST_PASSWORD = ''
+    '''
+else:
+    # !!! USE THIS CONFIGURATION FOR PRODUCTION !!!
+    DEBUG = True
+    ALLOWED_HOSTS = ['mammath.org']
+    SESSION_COOKIE_SECURE = True
+    CSRF_COOKIE_SECURE = True
+    SECURE_SSL_REDIRECT = True
+    SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+    SECURE_HSTS_PRELOAD = True
+    SECURE_HSTS_SECONDS = 3600
+
+    # Email for password reset
+    EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+    EMAIL_HOST = 'localhost'
+    EMAIL_PORT = 25
+    EMAIL_HOST_USER = ''
+    EMAIL_HOST_PASSWORD = ''
+    EMAIL_USE_TLS = False
+    DEFAULT_FROM_EMAIL = 'Admin <admin@mammath.org>'
 
 
 # Application definition
