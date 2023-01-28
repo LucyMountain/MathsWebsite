@@ -1,8 +1,8 @@
 import datetime
 import os
-os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MathsWebsite.settings')
-
 import django
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MathsWebsite.settings')
 django.setup()
 from django.core.management import call_command
 
