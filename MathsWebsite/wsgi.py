@@ -8,17 +8,23 @@ https://docs.djangoproject.com/en/4.1/howto/deployment/wsgi/
 """
 
 import os
+import sys
 
-from MathsWebsite.settings import BASE_DIR
+from MathsWebsite.settings import BASE_DIR, DJANGO_CONFIGURATION
+
+if DJANGO_CONFIGURATION == 'Dev':
+    sys.path.insert(0, os.path.join(BASE_DIR, 'venv/lib/site-packages'))
+else:
+    sys.path.insert(0, os.path.join(BASE_DIR, 'venv/lib/python3.10/site-packages'))
 
 
-def execfile(filename):
-    globals = dict(__file__=filename)
-    exec(open(filename).read(), globals)
+#def execfile(filename):
+#    globals = dict(__file__=filename)
+#    exec(open(filename).read(), globals)
 
 
-activate_this = os.path.join(BASE_DIR, 'venv/Scripts', 'activate_this.py')
-execfile(activate_this)
+#activate_this = os.path.join(BASE_DIR, 'venv/Scripts', 'activate_this.py')
+#execfile(activate_this)
 
 from django.core.wsgi import get_wsgi_application
 
