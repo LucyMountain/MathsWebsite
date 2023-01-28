@@ -13,8 +13,10 @@ import os
 from pathlib import Path
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
-BASE_DIR = Path(__file__).resolve().parent.parent
-
+#BASE_DIR = Path(__file__).resolve().parent.parent
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
+os.environ['SERVER_PROTOCOL'] = 'HTTP/1.1'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
@@ -48,7 +50,7 @@ if DJANGO_CONFIGURATION == 'Dev':
     '''
 else:
     # !!! USE THIS CONFIGURATION FOR PRODUCTION !!!
-    DEBUG = True
+    DEBUG = False
     ALLOWED_HOSTS = ['mammath.org']
     SESSION_COOKIE_SECURE = True
     CSRF_COOKIE_SECURE = True
