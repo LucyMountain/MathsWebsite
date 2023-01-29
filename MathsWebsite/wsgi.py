@@ -16,6 +16,7 @@ if DJANGO_CONFIGURATION == 'Dev':
     sys.path.insert(0, os.path.join(BASE_DIR, 'venv/lib/site-packages'))
 else:
     sys.path.insert(0, os.path.join(BASE_DIR, 'venv/lib/python3.10/site-packages'))
+    os.environ['DJANGO_SETTINGS_MODULE'] = 'MathsWebsite.settings'
 
 
 #def execfile(filename):
