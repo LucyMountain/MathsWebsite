@@ -1,15 +1,19 @@
+import logging
+
 from django.shortcuts import render, get_object_or_404
 
 # Create your views here.
 
-from django.http import HttpResponse, Http404
-from django.template import loader
+from django.http import HttpResponse
 
 from polls.models import Question
+log=logging.getLogger('MathsWebsite')
 
 
 def index(request):
+    log.debug('Starting query')
     latest_question_list = Question.objects.order_by('-pub_date')[:5]
+    log.debug('q_list: %s' % latest_question_list)
     context = {'latest_question_list': latest_question_list}
     return render(request, 'polls/index.html', context)
 

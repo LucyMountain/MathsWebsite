@@ -150,6 +150,63 @@ AUTH_PASSWORD_VALIDATORS = [
     },
 ]
 
+LOGGING = {
+    'version': 1,
+    'disable_existing_loggers': False,
+    'filters': {
+        'require_debug_false': {
+            '()': 'django.utils.log.RequireDebugFalse'
+        }
+    },
+    'handlers': {
+        'mail_admins': {
+            'level': 'ERROR',
+            'filters': ['require_debug_false'],
+            'class': 'django.utils.log.AdminEmailHandler'
+        },
+        'logfile': {
+            'level':'DEBUG',
+            'class':'logging.handlers.RotatingFileHandler',
+            'filename': BASE_DIR + "/debug.log",
+            'maxBytes': 50000,
+            'backupCount': 2,
+            'formatter': 'custom',
+        },
+        'console':{
+            'level':'DEBUG',
+            'class':'logging.StreamHandler',
+            'formatter': 'simple'
+        },
+    },
+    'loggers': {
+        #'django': {
+        #    'handlers':['logfile'],
+        #    'level':'DEBUG',
+        #    'propagate': True,
+        #},
+        #'django.request': {
+        #    'handlers': ['mail_admins', 'logfile'],
+        #    'level': 'DEBUG',
+        #    'propagate': True,
+        #},
+        'MathsWebsite': {
+            'handlers': ['console', 'logfile'],
+            'level': 'DEBUG',
+            'propagate': True,
+        },
+    },
+    'formatters': {
+        'verbose': {
+            'format': '%(levelname)s %(asctime)s %(module)s %(process)d %(thread)d %(message)s'
+        },
+        'simple': {
+            'format': '%(levelname)s %(message)s'
+        },
+        'custom': {
+            'format': '%(levelname)s %(asctime)s\n%(message)s'
+        },
+    },
+}
 
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/

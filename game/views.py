@@ -1,3 +1,5 @@
+import logging
+
 from django.db.models import Count
 from django.shortcuts import render, get_object_or_404
 
