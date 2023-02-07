@@ -24,6 +24,9 @@
   --background_colour:var(--b);
   --content_colour:var(--d);
   --content_colour_2:var(--f);
+
+  --rq_1:#c19d5a;
+  --rq_2:#1a4165;
 }
 
 body {
@@ -275,3 +278,4 @@ button {
 .game_listing__button:active {
   opacity: .5;
 }
+

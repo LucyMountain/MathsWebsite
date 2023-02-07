@@ -77,6 +77,7 @@ INSTALLED_APPS = [
     'sudoku.apps.SudokuConfig',
     'polls.apps.PollsConfig',
     'fractal.apps.FractalConfig',
+    'rowing_quiz.apps.RowingQuizConfig',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

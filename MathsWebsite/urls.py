@@ -22,5 +22,6 @@ urlpatterns = [
     path('sudoku/', include('sudoku.urls')),
     path('polls/', include('polls.urls')),
     path('fractal/', include('fractal.urls')),
+    path('rowing_quiz/', include('rowing_quiz.urls')),
     path('admin/', admin.site.urls),
 ]

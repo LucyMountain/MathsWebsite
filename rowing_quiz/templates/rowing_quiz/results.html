@@ -1,0 +1,10 @@
+{% extends 'quiz_base.html' %}
+{% load filters %}
+
+{% block scripts %}
+{% endblock scripts %}
+{% block content %}
+    {% for crew in crews %}
+        <div>{{ crew.crew_name }} {{ crew.score }}</div>
+    {% endfor %}
+{% endblock content %}

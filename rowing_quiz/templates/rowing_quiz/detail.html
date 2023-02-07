@@ -1,0 +1,17 @@
+{% extends 'quiz_base.html' %}
+{% load filters %}
+
+{% block scripts %}
+{% endblock scripts %}
+{% block content %}
+    {{ round }}
+    <img src="data:image/png;base64, {{chart|safe}}" alt="" id="img" class="chart">
+    <form action="{% url 'rowing_quiz:quiz_engine' %}" method="post">
+    {% csrf_token %}
+    {% for name in names %}
+        <input type="text" id="{{ name }}" name="{{ name }}" default="0">
+        <label for="{{ name }}">{{ name }}</label><br>
+    {% endfor %}
+    <input type="submit" value="Submit">
+    </form>
+{% endblock content %}
