@@ -2,6 +2,8 @@ import os
 import django
 import matplotlib
 import numpy as np
+from PIL.ImageDraw import ImageDraw
+from PIL.ImageFont import ImageFont
 from matplotlib.cbook import get_sample_data
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 
@@ -9,6 +11,7 @@ matplotlib.use('Agg')
 from matplotlib import pyplot as plt
 import base64
 from io import BytesIO
+from PIL import Image
 
 os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'MathsWebsite.settings')
 django.setup()
@@ -36,7 +39,7 @@ def create_quiz():
         Round.objects.create(
             quiz=quiz,
             round_name=rounds[r],
-            round_number=r+1,
+            round_number=r + 1,
         )
     return quiz
 
@@ -86,3 +89,13 @@ def generate_results_chart(results):
     fig.set_size_inches(10.5, 5.5)
     chart = get_graph()
     return chart
+
+
+def generate_podium(results):
+    img = Image.open(r'homepage/static/rowers.png')
+    text = "Hello World!"
+    font = ImageFont.truetype('Inconsolata-Light.ttf', 162)
+    draw = ImageDraw.Draw(img)
+    draw.text((1240, 1600), text, font=font, fill='white')
+    podium = get_graph()
+    return podium

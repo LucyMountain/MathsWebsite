@@ -24,7 +24,7 @@ def quiz_engine(request):
             Crew.objects.all().delete()
             response = None
             formset_class = modelformset_factory(
-                model=Crew, fields=('crew_name', 'score'), extra=0, can_delete=True)
+                model=Crew, fields=('crew_name', 'score', 'crew_number'), extra=0, can_delete=True)
             if request.method == 'POST':
                 formset = formset_class(data=request.POST)
                 if formset.is_valid():
@@ -46,6 +46,7 @@ def quiz_engine(request):
                 current_round = get_object_or_404(Round, round_number=r_num, quiz=quiz)
             scores = []
             names = []
+            numbers = {}
             for crew_id in request.session['crews']:
                 crew = get_object_or_404(Crew, id=crew_id)
                 s = crew.score
@@ -53,11 +54,13 @@ def quiz_engine(request):
                     s = int(s)
                 scores.append([crew.crew_name, s])
                 names.append(crew.crew_name)
+                numbers[crew.crew_name] = (crew.crew_number)
             chart = generate_results_chart(scores)
             context = {
                 'round': current_round,
                 'chart': chart,
-                'names': names
+                'names': names,
+                'numbers': numbers
             }
             if len(request.session['error']) > 0:
                 context['error'] = request.session['error']
@@ -77,7 +80,7 @@ def quiz_engine(request):
                     crew.save()
                 else:
                     request.session['error'] = "You didn't submit a value."
-                    request.session['state'] = QuizState.DETAIL.value
+                    request.session['state'] = QuizState.NEXT_ROUND.value
                     return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
             request.session['state'] = QuizState.NEXT_ROUND.value
             return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
