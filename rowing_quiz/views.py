@@ -85,21 +85,13 @@ def quiz_engine(request):
             request.session['state'] = QuizState.NEXT_ROUND.value
             return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
         case QuizState.RESULTS:
+            scores = []
             crews = Crew.objects.all().order_by('-score')
             for c in crews:
-                s = c.score
+                s=c.score
                 if s - int(s) == 0:
                     c.score = int(s)
-            scores = []
-            for crew_id in request.session['crews']:
-                crew = get_object_or_404(Crew, id=crew_id)
-                s = crew.score
-                if s - int(s) == 0:
-                    s = int(s)
-                scores.append([crew.crew_name, s])
-            chart = generate_results_chart(scores)
             context = {
-                'chart': chart,
                 'crews': crews
             }
             return render(request, 'rowing_quiz/results.html', context)
@@ -122,7 +114,7 @@ def start(request):
     for i in range(20):
         Crew.objects.create(
             crew_name=i,
-            score=0
+            score=random.randint(5, 20)
         )
     request.session['crews'] = [crew.id for crew in Crew.objects.all()]
     return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))

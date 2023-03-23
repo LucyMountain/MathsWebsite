@@ -57,7 +57,7 @@ def get_graph():
 
 def offset_image(x, y, ax):
     img = plt.imread(r'homepage/static/rowers.png')
-    im = OffsetImage(img, zoom=0.03)
+    im = OffsetImage(img, zoom=0.05)
     im.image.axes = ax
     x_offset = -30
     ab = AnnotationBbox(im, (x, y), xybox=(x_offset, 0), frameon=False,
@@ -75,7 +75,7 @@ def generate_results_chart(results):
 
     height = 0.9
     bar_h = plt.barh(y=crews, width=values, height=height, align='center', alpha=0, color="red")
-    ax.bar_label(bar_h, labels=labels, color='white', fontsize=7)
+    ax.bar_label(bar_h, labels=labels, color='white', fontsize=8)
 
     max_value = values.max()
     for i, (label, value) in enumerate(zip(crews, values)):

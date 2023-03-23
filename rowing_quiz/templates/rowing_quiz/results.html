@@ -3,9 +3,8 @@
 
 {% block scripts %}
 {% endblock scripts %}
-{% block round %}: Results{% endblock round %}
+{% block round %}{% endblock round %}
 {% block content %}
-    <img src="data:image/png;base64, {{chart|safe}}" alt="" id="img" class="chart">
     {% for crew in crews %}
         <div>{{ crew.crew_name }} {{ crew.score }}</div>
     {% endfor %}
