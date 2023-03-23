@@ -10,6 +10,13 @@
   --content_colour_2:var(--b);
 }
 
+@font-face {
+    font-family: 'GillSans';
+    font-style: normal;
+    font-weight: bold;
+    src: local('GillSans'), url('../static/fonts/GILLSANS.ttf') format('truetype');
+}
+
 body {
   background-color:var(--background_colour);
   margin:0em;
@@ -46,8 +53,14 @@ body {
 }
 .start__button {
   cursor:crosshair;
-  position:fixed;
-  right:4%;
+  display:block;
+  position:relative;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin-left:auto;
+  margin-right:auto;
+  width:50%;
   background: var(--button_colour);
   border: 1px solid var(--button_colour);
   border-radius: 6px;
@@ -99,6 +112,17 @@ button {
   display:block;
   margin-left:auto;
   margin-right:auto;
-  width:70%;
+  width:100%;
+}
+.title_button {
+  display:flex;
+  font-family:'GillSans';
+  position: absolute;
+  left: 50%;
+  -ms-transform: translateX(-50%);
+  transform: translateX(-50%);
+  margin:0;
+  border:0;
+  font-size:300%;
 }
 

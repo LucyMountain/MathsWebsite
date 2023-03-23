@@ -3,8 +3,8 @@
 
 {% block scripts %}
 {% endblock scripts %}
+{% block round %}: {{ round }} Round{% endblock round %}
 {% block content %}
-    {{ round }}
     <img src="data:image/png;base64, {{chart|safe}}" alt="" id="img" class="chart">
     <form action="{% url 'rowing_quiz:quiz_engine' %}" method="post">
     {% csrf_token %}

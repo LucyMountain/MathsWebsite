@@ -9,6 +9,8 @@ from rowing_quiz.enums import QuizState
 from rowing_quiz.models import Crew, Round, Quiz
 from rowing_quiz.quiz_generator import create_quiz, generate_results_chart
 
+from numpy import random
+
 
 def index(request):
     return render(request, 'rowing_quiz/index.html')
@@ -46,7 +48,10 @@ def quiz_engine(request):
             names = []
             for crew_id in request.session['crews']:
                 crew = get_object_or_404(Crew, id=crew_id)
-                scores.append([crew.crew_name, crew.score])
+                s = crew.score
+                if s - int(s) == 0:
+                    s = int(s)
+                scores.append([crew.crew_name, s])
                 names.append(crew.crew_name)
             chart = generate_results_chart(scores)
             context = {
@@ -56,6 +61,7 @@ def quiz_engine(request):
             }
             if len(request.session['error']) > 0:
                 context['error'] = request.session['error']
+                request.session['error'] = ''
             request.session['state'] = QuizState.SUBMIT.value
             return render(request, 'rowing_quiz/detail.html', context)
         case QuizState.NEXT_ROUND:
@@ -66,7 +72,7 @@ def quiz_engine(request):
             for crew_id in request.session['crews']:
                 crew = get_object_or_404(Crew, id=crew_id)
                 if crew.crew_name in request.POST:
-                    add_score = int(request.POST[crew.crew_name])
+                    add_score = float(request.POST[crew.crew_name])
                     crew.score += add_score
                     crew.save()
                 else:
@@ -78,6 +84,10 @@ def quiz_engine(request):
         case QuizState.RESULTS:
             scores = []
             crews = Crew.objects.all().order_by('-score')
+            for c in crews:
+                s=c.score
+                if s - int(s) == 0:
+                    c.score = int(s)
             context = {
                 'crews': crews
             }
@@ -93,6 +103,19 @@ def start(request):
     request.session['error'] = ""
     request.session['state'] = QuizState.ASSIGN_CREWS.value
     return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
+
+
+"""
+    request.session['state'] = QuizState.NEXT_ROUND.value
+    Crew.objects.all().delete()
+    for i in range(20):
+        Crew.objects.create(
+            crew_name=i,
+            score=random.randint(5, 20)
+        )
+    request.session['crews'] = [crew.id for crew in Crew.objects.all()]
+    return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
+"""
 
 
 # todo: what was he doing while drinking the ice tea

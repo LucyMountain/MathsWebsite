@@ -37,7 +37,7 @@ def create_quiz():
 
 def get_graph():
     buffer = BytesIO()
-    plt.savefig(buffer, format='png')
+    plt.savefig(buffer, format='png', bbox_inches='tight', pad_inches=0)
     buffer.seek(0)
     image_png = buffer.getvalue()
     graph = base64.b64encode(image_png)
@@ -48,9 +48,9 @@ def get_graph():
 
 def offset_image(x, y, ax):
     img = plt.imread(r'homepage/static/rowers.png')
-    im = OffsetImage(img, zoom=0.1)
+    im = OffsetImage(img, zoom=0.05)
     im.image.axes = ax
-    x_offset = -55
+    x_offset = -30
     ab = AnnotationBbox(im, (x, y), xybox=(x_offset, 0), frameon=False,
                         xycoords='data', boxcoords="offset points", pad=0)
     ax.add_artist(ab)
@@ -61,20 +61,22 @@ def generate_results_chart(results):
 
     crews = [r[0] for r in results]
     values = np.array([r[1] for r in results])
-    labels = [f'{r[0]}\n{r[1]}' for r in results]
+    # labels = [f'{r[0]}\n{r[1]}' for r in results]
+    labels = [f'{r[0]} - {r[1]}' for r in results]
 
     height = 0.9
-    bar_h = plt.barh(y=crews, width=values, height=height, align='center', alpha=0)
-    ax.bar_label(bar_h, labels=labels, color='white')
+    bar_h = plt.barh(y=crews, width=values, height=height, align='center', alpha=0, color="red")
+    ax.bar_label(bar_h, labels=labels, color='white', fontsize=8)
 
     max_value = values.max()
     for i, (label, value) in enumerate(zip(crews, values)):
         offset_image(value, i, ax=plt.gca())
     plt.subplots_adjust(left=0.15)
 
-    fig.set_facecolor('blue')
-    ax.set_facecolor("blue")
+    fig.set_facecolor('#5485b3')
+    ax.set_facecolor('#5485b3')
     plt.axis('off')
     plt.tight_layout()
+    fig.set_size_inches(10.5, 5)
     chart = get_graph()
     return chart
