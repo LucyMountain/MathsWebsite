@@ -22,11 +22,11 @@ from rowing_quiz.models import Round, Quiz
 def create_quiz():
     rounds = []
     rounds.append('Rowing History')
-    rounds.append('Film')
+    rounds.append('Sport')
     rounds.append('Music')
     rounds.append('Guess the Blade')
     rounds.append('Rowing Technical')
-    rounds.append('Sport')
+    rounds.append('Film')
     rounds.append('Maths and Science')
     rounds.append('Guess the Baby')
 
@@ -86,7 +86,7 @@ def generate_results_chart(results):
     ax.set_facecolor('#5485b3')
     plt.axis('off')
     plt.tight_layout()
-    fig.set_size_inches(10.5, 5.5)
+    fig.set_size_inches(10.5, 5)
     chart = get_graph()
     return chart
 

@@ -122,7 +122,7 @@ def start(request):
     for i in range(20):
         Crew.objects.create(
             crew_name=i,
-            score=0
+            score=random.randint(0, 20)
         )
     request.session['crews'] = [crew.id for crew in Crew.objects.all()]
     return HttpResponseRedirect(reverse('rowing_quiz:quiz_engine'))
